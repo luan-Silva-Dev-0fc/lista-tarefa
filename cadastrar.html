@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-gradient-to-b from-violet-700 to-rose-200 h-screen flex justify-center items-center">
+    <div class="bg-white shadow-lg rounded-lg px-4 py-4">
+        <a class="" href="/index.html">Voltar</a>
+        <h1 class="font-bold text-xl mb-6">Cadastre-se</h1>
+        <form onsubmit="logar()" class="flex flex-col w-80">
+            <label class="uppercase text-xs font-bold mb-2 block" for="name">Digite o seu nome</label>
+            <input id="nome"
+                class="pl-3 h-10 border-2 border-violet-200 focus:border-purple-400 duration-150 rounded outline-none mb-4"
+                type="text" placeholder="ex: João" required />
+
+            <label class="uppercase text-xs font-bold mb-2 block" for="email">Digite o seu email</label>
+            <input id="email"
+                class="pl-3 h-10 border-2 border-violet-200 focus:border-purple-400 duration-150 rounded outline-none mb-4"
+                type="email" placeholder="ex: joao@email.com" required />
+
+            <label for="senha" class="uppercase text-xs font-bold mb-2 block">Escreva uma senha</label>
+            <input id="senha" type="password" placeholder="********"
+                class="pl-3 h-10 border-2 border-violet-200 focus:border-purple-400 duration-150 rounded outline-none mb-4"
+                required />
+
+            <button type="submit"
+                class="w-full h-10 rounded bg-purple-400 hover:bg-indigo-600 duration-200 hover:text-white mb-2">Cadastrar</button>
+        </form>
+    </div>
+
+    <script>
+
+        function logar() {
+            event.preventDefault();
+
+            let nome = document.querySelector("#nome").value;
+            let email = document.querySelector("#email").value;
+            let senha = document.querySelector("#senha").value;
+
+            let dados = {
+                nome, email, senha
+            }
+
+            fetch("https://js-lista-de-tarefas-api.onrender.com/usuarios", {
+                method: "post",
+                headers: {
+                    "content-type": "application/json"
+                },
+                body: JSON.stringify(dados)
+            })
+
+                .then(resposta => resposta.json())
+                .then(json => {
+                    if (json.tipo == "error") {
+                        alert(json.mensagem);
+                        return;
+                    }
+
+                    alert(json.mensagem);
+                    window.location.href = "index.html";
+                })
+                .catch(error => {
+                    alert(error.message);
+                })
+
+            console.log("foi ativada");
+            console.log(dados);
+        }
+
+    </script>
+
+</body>
+
+</html>

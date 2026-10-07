@@ -2,13 +2,13 @@
 
 Aplicação web para gerenciamento e listagem de tarefas desenvolvida com HTML, Tailwind CSS e JavaScript.
 
-## 🚀 Funcionalidades
+## Funcionalidades
 
 - **Autenticação**: Interface para tela de login e navegação para cadastro.
 - **Painel de Tarefas**: Visualização e organização das tarefas em cards interativos.
 - **Design Moderno**: Estilizado com Tailwind CSS, proporcionando interface limpa e responsiva.
 
-## 📁 Estrutura de Arquivos
+##  Estrutura de Arquivos
 
 ```
 lista-tarefa/
@@ -19,13 +19,13 @@ lista-tarefa/
 └── README.md           # Documentação do projeto
 ```
 
-## 🛠️ Tecnologias Utilizadas
+##  Tecnologias Utilizadas
 
 - [HTML5](https://developer.mozilla.org/pt-BR/docs/Web/HTML)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [JavaScript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
 
-## 💻 Como executar o projeto
+##  Como executar o projeto
 
 1. Clone o repositório:
    ```bash

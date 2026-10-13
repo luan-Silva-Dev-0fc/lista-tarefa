@@ -1,41 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Lista de Tarefas</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
-<body class="bg-gradient-to-b from-violet-700 to-rose-200 h-screen flex justify-center items-center">
-    <div class="bg-white shadow-lg rounded-lg px-4 py-4">
-        <a class="" href="/index.html">Voltar</a>
+<body class="bg-slate-200 h-screen flex justify-center items-center">
+    <div class="bg-white shadow-lg rounded-lg p-4">
+        <a href="/index.html" class="mb-5">Voltar</a>
         <h1 class="font-bold text-xl mb-6">Cadastre-se</h1>
-        <form onsubmit="logar()" class="flex flex-col w-80">
-            <label class="uppercase text-xs font-bold mb-2 block" for="name">Digite o seu nome</label>
-            <input id="nome"
-                class="pl-3 h-10 border-2 border-violet-200 focus:border-purple-400 duration-150 rounded outline-none mb-4"
-                type="text" placeholder="ex: João" required />
+        <form onsubmit="cadastrar()" class="flex flex-col w-80">
+            <label for="nome" class="uppercase text-xs font-bold mb-2 block">Nome</label>
+            <input id="nome" type="text" placeholder="seu nome" class="pl-3 h-10 border-2 border-slate-400 focus:border-purple-600 duration-150 rounded outline-none mb-4" required />
 
-            <label class="uppercase text-xs font-bold mb-2 block" for="email">Digite o seu email</label>
-            <input id="email"
-                class="pl-3 h-10 border-2 border-violet-200 focus:border-purple-400 duration-150 rounded outline-none mb-4"
-                type="email" placeholder="ex: joao@email.com" required />
+            <label for="email" class="uppercase text-xs font-bold mb-2 block">Email</label>
+            <input id="email" type="email" placeholder="email@email.com" class="pl-3 h-10 border-2 border-slate-400 focus:border-purple-600 duration-150 rounded outline-none mb-4" required />
 
-            <label for="senha" class="uppercase text-xs font-bold mb-2 block">Escreva uma senha</label>
-            <input id="senha" type="password" placeholder="********"
-                class="pl-3 h-10 border-2 border-violet-200 focus:border-purple-400 duration-150 rounded outline-none mb-4"
-                required />
+            <label for="senha" class="uppercase text-xs font-bold mb-2 block">Senha</label>
+            <input id="senha" type="password" placeholder="********" class="pl-3 h-10 border-2 border-slate-400 focus:border-purple-600 duration-150 rounded outline-none mb-4" required />
+            
+            <button type="submit" class="w-full h-10 rounded bg-purple-400 hover:bg-purple-600 duration-200 hover:text-white font-bold">Cadastrar</button>
 
-            <button type="submit"
-                class="w-full h-10 rounded bg-purple-400 hover:bg-indigo-600 duration-200 hover:text-white mb-2">Cadastrar</button>
         </form>
     </div>
 
     <script>
 
-        function logar() {
+        function cadastrar(){
             event.preventDefault();
 
             let nome = document.querySelector("#nome").value;
@@ -43,35 +37,35 @@
             let senha = document.querySelector("#senha").value;
 
             let dados = {
-                nome, email, senha
+                nome,
+                email,
+                senha
             }
 
             fetch("https://js-lista-de-tarefas-api.onrender.com/usuarios", {
                 method: "post",
                 headers: {
-                    "content-type": "application/json"
+                    "Content-type": "application/json"
                 },
                 body: JSON.stringify(dados)
             })
-
-                .then(resposta => resposta.json())
-                .then(json => {
-                    if (json.tipo == "error") {
-                        alert(json.mensagem);
-                        return;
-                    }
-
+            .then(resposta => resposta.json())
+            .then(json => {
+                if(json.tipo == "error"){
                     alert(json.mensagem);
-                    window.location.href = "index.html";
-                })
-                .catch(error => {
-                    alert(error.message);
-                })
+                    return;
+                }
 
-            console.log("foi ativada");
+                alert(json.mensagem);
+                window.location.href = "index.html";
+            })
+            .catch(error => {
+                alert(error.message);
+            })
+
             console.log(dados);
+            
         }
-
     </script>
 
 </body>
